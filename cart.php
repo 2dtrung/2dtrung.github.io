@@ -80,7 +80,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#"  <?php if (isNotLoggedIn()){ echo 'style="display:none;"'; } ?> >Chào, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b></a>
-                  <a class="dropdown-item" href="dashboard.php" <?php if (!isAdmin()) { echo 'style="display:none;"'; } ?> >Dashboard</a>
+                  <a class="dropdown-item" href="./admin/dashboard.php" <?php if (!isAdmin()) { echo 'style="display:none;"'; } ?> >Dashboard</a>
                   <a class="dropdown-item" href="login.php" <?php if (!isNotLoggedIn()){ echo 'style="display:none;"'; } ?> >Đăng nhập</a>
                   <a class="dropdown-item" href="register.php" <?php if (!isNotLoggedIn()){ echo 'style="display:none;"'; } ?> >Đăng kí</a>
                   <a class="dropdown-item" href="logout.php" <?php if (isNotLoggedIn()){ echo 'style="display:none;"'; } ?> >Đăng xuất</a>
@@ -170,7 +170,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
     <form method='post' action=''>
     <input type='hidden' name='code' value="<?php echo $product["code"]; ?>" />
     <input type='hidden' name='action' value="remove" />
-    <button type='submit' class='remove'>Xóa sản phẩm</button>
+    <button type='submit' class='btn btn-danger remove'>Xóa sản phẩm</button>
     </form>
     </td>
     <td>
