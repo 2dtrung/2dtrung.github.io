@@ -8,11 +8,11 @@
 		if($_POST["code"] == $key){
 		unset($_SESSION["shopping_cart"][$key]);
 		$status = "<div class='box' style='color:red;'>
-		Product is removed from your cart!</div>";
+		1 Sản phẩm vừa được xóa khỏi giỏ hàng!</div>";
 		}
 		if(empty($_SESSION["shopping_cart"]))
 		unset($_SESSION["shopping_cart"]);
-			}		
+			}
 		}
 }
 
@@ -23,7 +23,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
         break; // Stop the loop after we've found the product
     }
 }
-  	
+
 }
 
   function isAdmin() {
@@ -67,7 +67,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
 </head>
 <body>
 <!--top bar (pt=padding top ,pb=padding bottom) -->
-    <div class="container-fluid bg-dark header-top d-md-block d-none">
+    <div class="container-fluid bg-dark header-top d-md-block">
         <div class="container">
             <div class="row text-light pt-2 pb-2">
                 <div class="col-md-5">
@@ -123,9 +123,9 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
                   <a class="nav-link" href="javascript:toBottom()">Liên hệ</a>
                 </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
+                <input class="form-control mr-sm-2" id="link_id" name="search" type="text" placeholder="Search" aria-label="Search">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" onclick="javascript:goTo()">
               </form>
             </div>
           </nav>
@@ -143,117 +143,23 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
       <div class="underline"></div>
     </div>
   </div>
+  <div class="container-fluid bg-light-gray">
   <div class="container pt-5">
-    <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th class="text-center">Giá</th>
-                        <th class="text-center">Tổng giá</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="col-sm-8 col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Tên sản phẩm</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-sm-1 col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
-                        </td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td>
-                        <td class="col-sm-1 col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Loại bỏ
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-6">
-                        <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
-                            <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Tên sản phẩm</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-warning"><strong>Leaves warehouse in 2 - 3 weeks</strong></span>
-                            </div>
-                        </div></td>
-                        <td class="col-md-1" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="2">
-                        </td>
-                        <td class="col-md-1 text-center"><strong>$4.99</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
-                        <td class="col-md-1">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Loại bỏ
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Tổng giá</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h5>Phí ship ước tính</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>Tổng tiền</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Tiếp tục mua hàng
-                        </button></td>
-                        <td>
-                        <button type="button" class="btn btn-success">
-                            Thanh toán <span class="glyphicon glyphicon-play"></span>
-                        </button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-  </div>
-
-  </div>
-
   <div class="cart">
     <?php
     if(isset($_SESSION["shopping_cart"])){
         $total_price = 0;
-    ?> 
+    ?>
     <table class="table">
     <tbody>
     <tr>
     <td></td>
-    <td>ITEM NAME</td>
-    <td>QUANTITY</td>
-    <td>UNIT PRICE</td>
-    <td>ITEMS TOTAL</td>
-    </tr> 
-    <?php 
+    <td>TÊN SẢN PHẨM</td>
+    <td>SỐ LƯỢNG</td>
+    <td>GIÁ 1 SẢN PHẨM</td>
+    <td>TỔNG GIÁ</td>
+    </tr>
+    <?php
     foreach ($_SESSION["shopping_cart"] as $product){
     ?>
     <tr>
@@ -264,7 +170,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
     <form method='post' action=''>
     <input type='hidden' name='code' value="<?php echo $product["code"]; ?>" />
     <input type='hidden' name='action' value="remove" />
-    <button type='submit' class='remove'>Remove Item</button>
+    <button type='submit' class='remove'>Xóa sản phẩm</button>
     </form>
     </td>
     <td>
@@ -293,21 +199,40 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
     }
     ?>
     <tr>
-    <td colspan="5" align="right">
-    <strong>TOTAL: <?php echo "$".$total_price; ?></strong>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td colspan="5" align="left">
+    <strong>Tổng cộng: <?php echo "$".$total_price; ?></strong>
     </td>
     </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="right">
+      <a type="button" class="btn btn-success" href="index.php">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Tiếp tục mua hàng
+      </a></td>
+      <td>
+      <button type="button" class="btn btn-success">
+          Thanh toán <span class="glyphicon glyphicon-play"></span>
+      </button></td>
+    </tr>
     </tbody>
-    </table> 
+    </table>
       <?php
     }else{
-    echo "<h3>Your cart is empty!</h3>";
+    echo "<h3>Giỏ hàng của bạn trống!</h3>";
     }
     ?>
     </div>
-    
+  </div>
+  </div>
+
     <div style="clear:both;"></div>
-    
+
     <div class="message_box" style="margin:10px 0px;">
     <?php echo $status; ?>
   </div>
@@ -448,7 +373,7 @@ if (isset($_POST['action']) && $_POST['action']=="change"){
           <div class="row mb-4">
           <div class="underline bg-light" style="width: 50px;"></div>
           </div>
-          <button class="btn btn-outline-light">Nike</button> <button class="btn btn-outline-light">Giày đá banh</button> <button class="btn btn-outline-light">Phụ kiện</button> <button class="btn btn-outline-light">Sale</button> <button class="btn btn-outline-light">Adidas</button>
+          <a class="btn btn-outline-light" type="button" href="shoes.php">Nike</a> <a class="btn btn-outline-light" type="button" href="shoes.php">Giày đá banh</a> <a class="btn btn-outline-light" type="button" href="accessories.php">Phụ kiện</a> <a class="btn btn-outline-light" type="button" href="sale.php">Sale</a> <button class="btn btn-outline-light">Adidas</button>
           </div>
         </div>
       </div>
