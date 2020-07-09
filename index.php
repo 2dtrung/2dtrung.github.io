@@ -3,61 +3,8 @@
 
   include 'config.php';
 
-  $status="";
-  if (isset($_POST['code']) && $_POST['code']!=""){
-  $code = $_POST['code'];
-  $result = mysqli_query(
-  $con,
-  "SELECT * FROM `products` WHERE `code`='$code'"
-  );
-  $row = mysqli_fetch_assoc($result);
-  $name = $row['name'];
-  $code = $row['code'];
-  $price = $row['price'];
-  $image = $row['image'];
+  include 'function.php';
 
-  $cartArray = array(
-  $code=>array(
-  'name'=>$name,
-  'code'=>$code,
-  'price'=>$price,
-  'quantity'=>1,
-  'image'=>$image)
-  );
-
-  if(empty($_SESSION["shopping_cart"])) {
-      $_SESSION["shopping_cart"] = $cartArray;
-      $status = "<div class='box'>Product is added to your cart!</div>";
-  }else{
-      $array_keys = array_keys($_SESSION["shopping_cart"]);
-      if(in_array($code,$array_keys)) {
-  $status = "<div class='box' style='color:red;'>
-  Product is already added to your cart!</div>";
-      } else {
-      $_SESSION["shopping_cart"] = array_merge(
-      $_SESSION["shopping_cart"],
-      $cartArray
-      );
-      $status = "<div class='box'>Product is added to your cart!</div>";
-  }
-
-  }
-}
-
-  function isAdmin() {
-    if ( isset( $_SESSION['username'] ) && $_SESSION['username'] && '1' == $_SESSION['user_level']) {
-        return true;
-    } else {
-        return false;
-    }
-  }
-  function isNotLoggedIn() {
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-      return true;
-    } else {
-      return false;
-    }
-  }
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +41,7 @@
     <title>Assignment 2 - Tiuh</title>
 </head>
 <body>
+
 <!--top bar (pt=padding top ,pb=padding bottom) -->
     <div class="container-fluid bg-dark header-top d-md-block d-none">
         <div class="container">
@@ -192,7 +140,7 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>
+</div>
 
 
 
@@ -236,7 +184,7 @@
   <div class="container mt-5">
     <div class="row">
       <?php
-        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'best_seller'");
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `status` = 'best_seller'");
         while($row = mysqli_fetch_assoc($result)){
             echo 
               "
@@ -274,7 +222,7 @@
   <div class="container mt-5 pb-5">
     <div class="row">
       <?php
-        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'futsal_show'");
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `status` = 'show_off'");
         while($row = mysqli_fetch_assoc($result)){
             echo 
               "
@@ -442,49 +390,27 @@
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-21.jpg" class="card-img-top" alt="shirt1">
-          <div class="card-body">
-            <h4>Korea Shirt</h4>
-            <h6>$22.87</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-22.jpg" class="card-img-top" alt="shirt2">
-          <div class="card-body">
-            <h4>Nigeria Shirt</h4>
-            <h6>$22.87</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-23.jpg" class="card-img-top" alt="shirt3">
-          <div class="card-body">
-            <h4>USA Shirt</h4>
-            <h6>$22.87</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-24.jpg" class="card-img-top" alt="shirt4">
-          <div class="card-body">
-            <h4>Norway Shirt</h4>
-            <h6>$22.87</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+      <?php
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'shirt'");
+        while($row = mysqli_fetch_assoc($result)){
+            echo 
+              "
+                <div class='col-md-3'>
+                  <form method='post' action=''>
+                    <input type='hidden' name='code' value=".$row['code']." />
+                    <div class='card'>
+                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                      <div class='card-body'>
+                        <h5>".$row['name']."</h5>
+                        <h6>$".$row['price']."</h6>
+                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              ";
+        }        
+      ?>
     </div>
   </div>
 

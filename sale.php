@@ -1,20 +1,10 @@
 <?php
   session_start();
 
-  function isAdmin() {
-    if ( isset( $_SESSION['username'] ) && $_SESSION['username'] && '1' == $_SESSION['user_level']) {
-        return true;
-    } else {
-        return false;
-    }
-  }
-  function isNotLoggedIn() {
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-      return true;
-    } else {
-      return false;
-    }
-  }
+  include 'config.php';
+
+  include 'function.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -134,98 +124,32 @@
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-18.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Hypervenom Black</h5>
-            <h6>$34.00 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+      <?php
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `status` = 'sale'");
+        while($row = mysqli_fetch_assoc($result)){
+            echo 
+              "
+                <div class='col-md-3'>
 
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-19.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Mercurial S6</h5>
-            <h6>$44.00 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+                  <form method='post' action=''>
+                    <input type='hidden' name='code' value=".$row['code']." />
+                    <div class='card'>
+                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                      <div class='card-body'>
+                        <h5>".$row['name']."</h5>
+                        <h6>$".$row['price']."</h6>
+                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                      </div>
+                    </div>
+                  </form>
 
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-20.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Mercurial S2</h5>
-            <h6>$52.00 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+                </div>
 
+              ";
+        }        
+      ?>
 
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-4.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Mercurial Super</h5>
-            <h6>$66.00 <span style="text-decoration: line-through">$67.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-15.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Ống đồng, Vớ</h5>
-            <h6>$12.00 <span style="text-decoration: line-through">$20.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-16.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Ống đồng</h5>
-            <h6>$5.00 <span style="text-decoration: line-through">$6.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-17.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Bó cổ tay</h5>
-            <h6>$12.00 <span style="text-decoration: line-through">$15.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-45.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Bao tay</h5>
-            <h6>$16.00 <span style="text-decoration: line-through">$25.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-    </div>
+      
   </div>
 </div>
 
@@ -364,49 +288,27 @@
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-21.jpg" class="card-img-top" alt="shirt1">
-          <div class="card-body">
-            <h4>Korea Shirt</h4>
-            <h6>$22.87 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-22.jpg" class="card-img-top" alt="shirt2">
-          <div class="card-body">
-            <h4>Nigeria Shirt</h4>
-            <h6>$22.87 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-23.jpg" class="card-img-top" alt="shirt3">
-          <div class="card-body">
-            <h4>USA Shirt</h4>
-            <h6>$22.87 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-24.jpg" class="card-img-top" alt="shirt4">
-          <div class="card-body">
-            <h4>Norway Shirt</h4>
-            <h6>$22.87 <span style="text-decoration: line-through">$56.00</span></h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+    <?php
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'shirt'");
+        while($row = mysqli_fetch_assoc($result)){
+            echo 
+              "
+                <div class='col-md-3'>
+                  <form method='post' action=''>
+                    <input type='hidden' name='code' value=".$row['code']." />
+                    <div class='card'>
+                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                      <div class='card-body'>
+                        <h5>".$row['name']."</h5>
+                        <h6>$".$row['price']."</h6>
+                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              ";
+        }        
+      ?>
     </div>
   </div>
 
@@ -497,7 +399,7 @@
 
 
 
-
+    <?php mysqli_close($con); ?>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>
