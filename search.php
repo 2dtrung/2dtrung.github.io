@@ -98,9 +98,9 @@
                   <a class="nav-link" href="javascript:toBottom()">Liên hệ</a>
                 </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="link_id" type="text" placeholder="Search" aria-label="Search">
-                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Search" onclick="javascript:goTo()">
+              <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
+                <input class="form-control mr-sm-2" id="link_id" name="search" type="text" placeholder="Search" aria-label="Search">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" onclick="javascript:goTo()">
               </form>
             </div>
           </nav>
