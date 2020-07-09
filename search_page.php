@@ -1,10 +1,19 @@
 <?php
   session_start();
-
-  include 'config.php';
-
-  include 'function.php';
-
+  function isAdmin() {
+    if ( isset( $_SESSION['username'] ) && $_SESSION['username'] && '1' == $_SESSION['user_level']) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+  function isNotLoggedIn() {
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+      return true;
+    } else {
+      return false;
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +47,11 @@
       }
     </script>
     <link rel="stylesheet" href="css/style.css">
-    <title>Shoes</title>
+    <title>Introduction</title>
 </head>
 <body>
 <!--top bar (pt=padding top ,pb=padding bottom) -->
-    <div class="container-fluid bg-dark header-top d-md-block">
+    <div class="container-fluid bg-dark header-top d-md-block d-none">
         <div class="container">
             <div class="row text-light pt-2 pb-2">
                 <div class="col-md-5">
@@ -98,157 +107,65 @@
                   <a class="nav-link" href="javascript:toBottom()">Liên hệ</a>
                 </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
-                <input class="form-control mr-sm-2" id="link_id" name="search" type="text" placeholder="Search" aria-label="Search">
-                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" onclick="javascript:goTo()">
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="link_id" type="text" placeholder="Search" aria-label="Search">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Search" onclick="javascript:goTo()">
               </form>
             </div>
           </nav>
 </div>
 
+
   <div class="container-fluid bg-light-gray">
-
-  <div class="container pt-5">
-
-    <div class="row">
-      <h3>GIÀY SÂN 11</h3>
-    </div>
-      <div class="row">
-      <div class="underline"></div>
-    </div>
-  </div>
-
-
-
-  <div class="container mt-5">
-    <div class="row">
-    <?php
-        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'outdoor'");
-        while($row = mysqli_fetch_assoc($result)){
-            echo
-              "
-                <div class='col-md-3'>
-                  <form method='post' action=''>
-                    <input type='hidden' name='code' value=".$row['code']." />
-                    <div class='card'>
-                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
-                      <div class='card-body'>
-                        <h5>".$row['name']."</h5>
-                        <h6>$".$row['price']."</h6>
-                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              ";
-        }
-      ?>
-    </div>
-  </div>
-
-
-
-  <div class="container mt-5">
-
-    <div class="row">
-      <h3>GIÀY SÂN FUTSAL</h3>
-    </div>
-      <div class="row">
-      <div class="underline"></div>
-    </div>
-  </div>
-
-
-  <div class="container mt-5 pb-5">
-    <div class="row">
-    <?php
-        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'futsal'");
-        while($row = mysqli_fetch_assoc($result)){
-            echo
-              "
-                <div class='col-md-3'>
-                  <form method='post' action=''>
-                    <input type='hidden' name='code' value=".$row['code']." />
-                    <div class='card'>
-                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
-                      <div class='card-body'>
-                        <h5>".$row['name']."</h5>
-                        <h6>$".$row['price']."</h6>
-                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              ";
-        }
-      ?>
-    </div>
-  </div>
-
-
-  </div>
-
-
-  <div class="container-fluid pt-5 pb-5 bg-light-gray">
-    <div class="container">
-      <div class="row">
-        <h4>NHÃN HÀNG</h4>
-      </div>
-      <div class="row">
-        <div class="underline-blue"></div>
-      </div>
-    </div>
-
     <div class="container pt-5">
+
       <div class="row">
-        <div class="col-md-3">
-          <div class="card">
-            <img src="img/img-29.jpg" alt="img" class="card-img-top">
-            <div class="card-body">
-              <h4>Nike</h4>
-              <h6>#1</h6>
-            <button class="btn btn-danger">Xem thêm</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card">
-            <img src="img/img-30.jpg" alt="img" class="card-img-top">
-            <div class="card-body">
-              <h4>Puma</h4>
-              <h6>#2</h6>
-            <button class="btn btn-danger">Xem thêm</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card">
-            <img src="img/img-31.jpg" alt="img" class="card-img-top">
-            <div class="card-body">
-              <h4>Adidas</h4>
-              <h6>#3</h6>
-            <button class="btn btn-danger">Xem thêm</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card">
-            <img src="img/img-32.jpg" alt="img" class="card-img-top">
-            <div class="card-body">
-              <h4>NBalance</h4>
-              <h6>#4</h6>
-            <button class="btn btn-danger">Xem thêm</button>
-            </div>
-          </div>
-        </div>
+        <h3>Ket qua tim kiem</h3>
+      </div>
+        <div class="row">
+        <div class="underline"></div>
       </div>
     </div>
+    <div class="container pt-5">
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>ITEM NAME</th>
+        <th>PRICE</th>
+      </tr>
+    <?php
+    include 'config.php';
+    $conn = mysqli_connect("localhost","root","","demo");
+    $set=$_POST['search'];
+    if($set){
+      $show="SELECT * FROM products where brand='$set'";
+      $result=mysqli_query($conn,$show);
+      while ($rows=mysqli_fetch_array($result)){
+
+        echo "<tr>";
+        echo "<td>";
+        echo "<img src=".$rows['image']." width='140' height='100'>";
+        echo "</td>";
+        echo "<td>";
+        echo $rows ['name'];
+        echo "</td>";
+        echo "<td>";
+        echo $rows ['price'];
+        echo "</td>";
+        echo "</tr>";
+        echo "<br/>";
+
+
+      }
+    }
+    else {
+      echo "nothing found";
+    }
+    ?>
+    </table>
+
   </div>
-
-
+  </div>
 
 
 
@@ -271,7 +188,6 @@
           <p><i class="fa fa-chevron-right" aria-hidden="true"></i> Bảo mật</p>
           <p><i class="fa fa-chevron-right" aria-hidden="true"></i> Bình luận</p>
           <a href="intro.php" style="color: white; text-decoration: none;"><i class="fa fa-chevron-right" aria-hidden="true"></i> Hướng dẫn</a>
-
           </div>
 
 
@@ -335,7 +251,7 @@
 
 
 
-    <?php mysqli_close($con); ?>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>

@@ -42,7 +42,7 @@
 </head>
 <body>
 <!--top bar (pt=padding top ,pb=padding bottom) -->
-    <div class="container-fluid bg-dark header-top d-md-block d-none">
+    <div class="container-fluid bg-dark header-top d-md-block ">
         <div class="container">
             <div class="row text-light pt-2 pb-2">
                 <div class="col-md-5">
@@ -98,9 +98,9 @@
                   <a class="nav-link" href="javascript:toBottom()">Liên hệ</a>
                 </li>
               </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="link_id" type="text" placeholder="Search" aria-label="Search">
-                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Search" onclick="javascript:goTo()">
+              <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
+                <input class="form-control mr-sm-2" id="link_id" name="search" type="text" placeholder="Search" aria-label="Search">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" onclick="javascript:goTo()">
               </form>
             </div>
           </nav>
@@ -127,7 +127,7 @@
       <?php
         $result = mysqli_query($con,"SELECT * FROM `products` WHERE `status` = 'sale'");
         while($row = mysqli_fetch_assoc($result)){
-            echo 
+            echo
               "
                 <div class='col-md-3'>
 
@@ -146,10 +146,10 @@
                 </div>
 
               ";
-        }        
+        }
       ?>
 
-      
+
   </div>
 </div>
 
@@ -291,7 +291,7 @@
     <?php
         $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'shirt'");
         while($row = mysqli_fetch_assoc($result)){
-            echo 
+            echo
               "
                 <div class='col-md-3'>
                   <form method='post' action=''>
@@ -307,7 +307,7 @@
                   </form>
                 </div>
               ";
-        }        
+        }
       ?>
     </div>
   </div>

@@ -111,7 +111,7 @@
   <div class="container pt-5">
 
     <div class="row">
-      <h3>KẾT QỦA TÌM KIẾM</h3>
+      <h3>KẾT QUẢ TÌM KIẾM</h3>
     </div>
       <div class="row">
       <div class="underline"></div>
@@ -123,25 +123,72 @@
   <div class="container mt-5">
     <div class="row">
     <?php
-        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `name` LIKE 'Tiempo%' ");
-        while($row = mysqli_fetch_assoc($result)){
-            echo 
+        $set=$_POST['search'];
+        if($set){
+          $result = mysqli_query($con,"SELECT * FROM products WHERE name LIKE '$set%' ");
+          $result1 = mysqli_query($con,"SELECT * FROM products WHERE brand LIKE '$set' ");
+          $result2 = mysqli_query($con,"SELECT * FROM products WHERE category LIKE '$set%' ");
+            while($row = mysqli_fetch_assoc($result1)){
+              echo
+                "
+                  <div class='col-md-3'>
+                    <form method='post' action=''>
+                      <input type='hidden' name='code' value=".$row['code']." />
+                      <div class='card'>
+                        <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                        <div class='card-body'>
+                          <h5>".$row['name']."</h5>
+                          <h6>$".$row['price']."</h6>
+                          <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                ";
+          }
+          while($row1 = mysqli_fetch_assoc($result)){
+            if($set=="nike" || $set=="adidas" || $set=="joma"|| $set=="Nike" || $set=="Adidas" || $set=="Joma") break;
+            echo
               "
                 <div class='col-md-3'>
                   <form method='post' action=''>
-                    <input type='hidden' name='code' value=".$row['code']." />
+                    <input type='hidden' name='code' value=".$row1['code']." />
                     <div class='card'>
-                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                      <img src='".$row1['image']."' alt='card-1' class='card-img-top'>
                       <div class='card-body'>
-                        <h5>".$row['name']."</h5>
-                        <h6>$".$row['price']."</h6>
+                        <h5>".$row1['name']."</h5>
+                        <h6>$".$row1['price']."</h6>
                         <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
                       </div>
                     </div>
                   </form>
                 </div>
               ";
-        }        
+        }
+        while($row2 = mysqli_fetch_assoc($result2)){
+          if($set=="nike" || $set=="adidas" || $set=="joma"|| $set=="Nike" || $set=="Adidas" || $set=="Joma") break;
+          echo
+            "
+              <div class='col-md-3'>
+                <form method='post' action=''>
+                  <input type='hidden' name='code' value=".$row1['code']." />
+                  <div class='card'>
+                    <img src='".$row2['image']."' alt='card-1' class='card-img-top'>
+                    <div class='card-body'>
+                      <h5>".$row2['name']."</h5>
+                      <h6>$".$row2['price']."</h6>
+                      <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            ";
+      }
+
+      }
+      else {
+        echo "Không có sản phẩm cần tìm";
+      }
       ?>
     </div>
   </div>
