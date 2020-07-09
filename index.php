@@ -231,76 +231,37 @@
     </div>
   </div>
 
-  <?php
-$result = mysqli_query($con,"SELECT * FROM `products`");
-while($row = mysqli_fetch_assoc($result)){
-    echo "<div class='product_wrapper'>
-    <form method='post' action=''>
-    <input type='hidden' name='code' value=".$row['code']." />
-    <div class='image'><img src='".$row['image']."' /></div>
-    <div class='name'>".$row['name']."</div>
-    <div class='price'>$".$row['price']."</div>
-    <button type='submit' class='buy'>Buy Now</button>
-    </form>
-    </div>";
-        }
-mysqli_close($con);
-?>
+  
 
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-3.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Tiempo Legend 8FG</h5>
-            <h6>$76.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-4.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Mercurial Vapor Elite</h5>
-            <h6>$75.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-5.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Phantom Venom Elite</h5>
-            <h6>$52.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-6.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Phantom Vision Elite</h5>
-            <h6>$66.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+      <?php
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'best_seller'");
+        while($row = mysqli_fetch_assoc($result)){
+            echo 
+              "
+                <div class='col-md-3'>
+                  <form method='post' action=''>
+                    <input type='hidden' name='code' value=".$row['code']." />
+                    <div class='card'>
+                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                      <div class='card-body'>
+                        <h5>".$row['name']."</h5>
+                        <h6>$".$row['price']."</h6>
+                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              ";
+        }        
+      ?>
     </div>
   </div>
 
 
 
   <div class="container mt-5">
-
     <div class="row">
       <h3>GIÀY FUTSAL</h3>
     </div>
@@ -312,51 +273,31 @@ mysqli_close($con);
 
   <div class="container mt-5 pb-5">
     <div class="row">
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-7.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Tiempo Black</h5>
-            <h6>$36.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+      <?php
+        $result = mysqli_query($con,"SELECT * FROM `products` WHERE `category` = 'futsal_show'");
+        while($row = mysqli_fetch_assoc($result)){
+            echo 
+              "
+                <div class='col-md-3'>
 
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-8.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Tiempo 8 IC</h5>
-            <h6>$36.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+                  <form method='post' action=''>
+                    <input type='hidden' name='code' value=".$row['code']." />
+                    <div class='card'>
+                      <img src='".$row['image']."' alt='card-1' class='card-img-top'>
+                      <div class='card-body'>
+                        <h5>".$row['name']."</h5>
+                        <h6>$".$row['price']."</h6>
+                        <button type='submit' class='btn btn-danger buy'><i class='fa fa-cart-plus' aria-hidden='true'></i> Thêm vào giỏ</button>
+                      </div>
+                    </div>
+                  </form>
 
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-9.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>React Gato S9</h5>
-            <h6>$26.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
+                </div>
 
+              ";
+        }        
+      ?>
 
-
-      <div class="col-md-3">
-        <div class="card">
-          <img src="img/img-10.jpg" alt="card-1" class="card-img-top">
-          <div class="card-body">
-            <h5>Mercurial Superfly</h5>
-            <h6>$29.00</h6>
-            <button class="btn btn-danger"><i class="fa fa-cart-plus" aria-hidden="true"></i> Thêm vào giỏ</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -374,6 +315,9 @@ mysqli_close($con);
           <div class="row">
             <div class="underline-green"></div>
           </div>
+
+          
+
           <div class="media mt-5">
             <img src="img/img-12.jpg" class="img-fluid mr-3" alt="media1">
             <div class="media-body mt-2">
@@ -759,7 +703,7 @@ mysqli_close($con);
 
 
 
-
+    <?php mysqli_close($con); ?>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp" crossorigin="anonymous"></script>

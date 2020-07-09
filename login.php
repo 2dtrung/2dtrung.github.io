@@ -238,7 +238,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <span class="help-block"><?php echo $password_err; ?></span>
         </div>
         <div class="form-group">
-            <input type="button" class="btn btn-primary" value="Đăng nhập" onclick="javascript:check()">
+            <input type="submit" class="btn btn-primary" value="Đăng nhập" onclick="javascript:check()">
         </div>
         <p>Nếu bạn không có tài khoản? <a href="register.php">Đăng kí ngay</a>.</p>
     </form>
