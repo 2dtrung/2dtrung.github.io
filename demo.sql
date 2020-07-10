@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2020 at 10:01 AM
+-- Generation Time: Jul 10, 2020 at 08:54 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -37,8 +37,8 @@ CREATE TABLE `products` (
   `price` double(9,2) NOT NULL,
   `image` varchar(250) NOT NULL,
   `imported_price` double(9,2) NOT NULL,
-  `revenue` double(9,2) NOT NULL,
-  `profit` double(9,2) NOT NULL
+  `revenue` double(9,2) NOT NULL DEFAULT 0.00,
+  `profit` double(9,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `brand`, `category`, `status`, `code`, `price`, `image`, `imported_price`, `revenue`, `profit`) VALUES
-(1, 'Tiempo Legend 8FG', 'Nike', 'outdoor', 'best_seller', 'TL8', 79.00, './img/img-3.jpg', 69.00, 0.00, 0.00),
+(1, 'Tiempo', 'Nike', 'outdoor', 'best_seller', 'TL8', 90.00, './img/img-3.jpg', 69.00, 0.00, 0.00),
 (2, 'Mercurial Vapor Elite', 'Nike', 'outdoor', 'best_seller', 'MVE', 75.00, './img/img-4.jpg', 65.00, 0.00, 0.00),
 (3, 'Phantom Venom Elite', 'Nike', 'outdoor', 'best_seller', 'PVE', 52.00, './img/img-5.jpg', 42.00, 0.00, 0.00),
 (4, 'Phantom Vision Elite', 'Nike', 'outdoor', 'best_seller', 'PVE1', 66.00, './img/img-6.jpg', 56.00, 0.00, 0.00),
@@ -95,7 +95,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   `name` varchar(25) NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` varchar(11) NOT NULL,
   `address` text NOT NULL,
   `user_level` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -105,8 +105,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `name`, `phone`, `address`, `user_level`) VALUES
-(1, 'tuhuynh', '$2y$10$v0cNajTLVfkemo1TdMIBu.iiXl0uBysfD8NlCzf22W2Wvm374wE.6', '2020-06-27 09:37:56', '', 0, '', 0),
-(3, 'admin', '$2y$10$ktGQBSPnifaCAM1uiimxkOoYOXhCBqmPv1.Mm2rHGTtxwKyYps17y', '2020-06-27 15:06:47', '', 0, '', 1);
+(1, 'admin', '$2y$10$ktGQBSPnifaCAM1uiimxkOoYOXhCBqmPv1.Mm2rHGTtxwKyYps17y', '2020-06-27 15:06:47', 'Quản trị viên', '0346416702', 'AH2', 1),
+(2, 'tuhuynh', '$2y$10$v0cNajTLVfkemo1TdMIBu.iiXl0uBysfD8NlCzf22W2Wvm374wE.6', '2020-06-27 09:37:56', 'Huỳnh Ngọc Tú', '0346416702', 'AH2', 0),
+(5, 'tuhuynh23', '$2y$10$7jh.nDVUOwLCbqKTOcSgPeHDl5btgtbyUs3BtfbIqZgbJYG7/wXZC', '2020-07-10 10:01:47', 'H N Tú', '0346416702', 'KTX A', 0);
 
 --
 -- Indexes for dumped tables
@@ -134,13 +135,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
