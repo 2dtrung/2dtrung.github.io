@@ -23,11 +23,11 @@
             $target_dir = "img/";
             $file_name = time().'.'.basename($image['name']);
             $target_file = $target_dir.basename($image["name"]);
-            //$target_file = time().'.'.$target_file;
+            
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-            // Check if image file is a actual image or fake image
+            
                 $check = getimagesize($image["tmp_name"]);
                 if($check !== false) {
                     $uploadOk = 1;
@@ -45,7 +45,7 @@
                 $uploadOk = 0;
                 }
 
-                // Check if $uploadOk is set to 0 by an error
+                
                 if ($uploadOk == 0) {
                     return -1;
                 } else {
@@ -57,7 +57,7 @@
                     echo "Sorry, there was an error uploading your file.";
                 }
                 }
-        } //end function
+        } 
         public function updateProduct($id,$name,$price,$brand,$cate,$code,$image,$status,$imported_price) {
             if(strlen($image['name'])==0) {
                 $m_product = new M_product();
@@ -68,11 +68,11 @@
             $target_dir = "img/";
             $file_name = time().'.'.basename($image['name']);
             $target_file = $target_dir.basename($image["name"]);
-            //$target_file = time().'.'.$target_file;
+            
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-            // Check if image file is a actual image or fake image
+            
                 $check = getimagesize($image["tmp_name"]);
                 if($check !== false) {
                     $uploadOk = 1;
@@ -90,7 +90,7 @@
                 $uploadOk = 0;
                 }
 
-                // Check if $uploadOk is set to 0 by an error
+                
                 if ($uploadOk == 0) {
                     return -1;
                 } else {
@@ -104,7 +104,7 @@
                 }
 
             }
-        } //end function
+        } 
         public function getProducts() {
             $m_product = new M_product();
             $trang_hientai=isset($_GET['page']) ?$_GET['page'] :1;

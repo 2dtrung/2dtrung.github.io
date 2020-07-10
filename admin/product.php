@@ -5,7 +5,7 @@
 		exit;
 	}
 	
-	//Check if the user is admin, if not then redirect to homepage
+	
 	function isAdmin() {
 		if ( isset( $_SESSION['username'] ) && ($_SESSION['user_level'] == '1') ) {
 			return true;

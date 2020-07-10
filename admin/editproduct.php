@@ -1,8 +1,3 @@
-
-
-
-
-
 <?php
 		session_start();
 	if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -10,7 +5,6 @@
 		exit;
 	}
 	
-	//Check if the user is admin, if not then redirect to homepage
 	function isAdmin() {
 		if ( isset( $_SESSION['username'] ) && ($_SESSION['user_level'] == '1') ) {
 			return true;

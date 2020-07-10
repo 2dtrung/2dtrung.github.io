@@ -1,5 +1,5 @@
 <?php
-// Include config file
+
 require_once "config.php";
 
 function isAdmin() {
@@ -17,30 +17,30 @@ function isNotLoggedIn() {
   }
 }
 
-// Define variables and initialize with empty values
+
 $username = $password = $confirm_password = $name = $phone = $address = "";
 $username_err = $password_err = $confirm_password_err = $name_err = $phone_err = $address_err = "";
 
-// Processing form data when form is submitted
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    // Validate username
+    
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
-        // Prepare a select statement
+        
         $sql = "SELECT id FROM users WHERE username = ?";
 
         if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+            
             $stmt->bind_param("s", $param_username);
 
-            // Set parameters
+            
             $param_username = trim($_POST["username"]);
 
-            // Attempt to execute the prepared statement
+            
             if($stmt->execute()){
-                // store result
+                
                 $stmt->store_result();
 
                 if($stmt->num_rows == 1){
@@ -52,12 +52,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "Oops! Something went wrong. Please try again later.";
             }
 
-            // Close statement
+            
             $stmt->close();
         }
     }
 
-    // Validate password
+    
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";
     } elseif(strlen(trim($_POST["password"])) < 6){
@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = trim($_POST["password"]);
     }
 
-    // Validate confirm password
+    
     if(empty(trim($_POST["confirm_password"]))){
         $confirm_password_err = "Please confirm password.";
     } else{
@@ -80,37 +80,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $phone = trim($_POST["phone"]);
     $address = trim($_POST["address"]);
 
-    // Check input errors before inserting in database
+    
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
 
-        // Prepare an insert statement
+        
         $sql = "INSERT INTO users (username, password, name, phone, address) VALUES (?, ?, ?, ?, ?)";
 
         if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
+            
             $stmt->bind_param("sssss", $param_username, $param_password, $param_name, $param_phone, $param_address);
 
             // Set parameters
             $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_password = password_hash($password, PASSWORD_DEFAULT); 
             $param_name = $name;
             $param_phone = $phone;
             $param_address = $address;
 
-            // Attempt to execute the prepared statement
+            
             if($stmt->execute()){
-                // Redirect to login page
+                
                 header("location: login.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
 
-            // Close statement
+            
             $stmt->close();
         }
     }
 
-    // Close connection
+    
     $mysqli->close();
 }
 ?>

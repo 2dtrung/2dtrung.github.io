@@ -7,7 +7,6 @@
 		exit;
 	}
 	
-	//Check if the user is admin, if not then redirect to homepage
 	function isAdmin() {
 		if ( isset( $_SESSION['username'] ) && ($_SESSION['user_level'] == '1') ) {
 			return true;
@@ -49,12 +48,12 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                            <!-- guest -->
+                           
                                 <a class="navbar-brand" href='dashboard.php'>TiUh</a>
                             <ul class="user-menu">
                                 <li class="dropdown pull-right">
                             
-                            <!-- user -->
+                           
                             <ul class="user-menu">
                                 <li class="dropdown pull-right">
                                 <li class="nav-item dropdown">
@@ -67,7 +66,7 @@
                                             Logout
                                         </a>
     
-                                        <!-- <form id="logout-form" action="../login.php" method="POST" style="display: none;"> -->
+                                        
                                         </form>
                                     </div>
                                 </li>
@@ -75,7 +74,7 @@
                     </ul>
                 </div>
                                 
-            </div><!-- /.container-fluid -->
+            </div>
         </nav>
         <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <ul class="nav menu">
@@ -85,12 +84,12 @@
         <li class="active"><a href="user.php"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Người dùng  </a></li>
         <li role="presentation" class="divider"></li>
     </ul>
-</div><!--/.sidebar-->
+</div>
  
 <div class="container">
-    <div class="row"  style="margin-left:10px" >
+    <div class="row"  style="margin-left:150px" >
     	<div class="col-sm-12" style="margin-top:50px">
-        	<!-- <div class="alert alert-success">Added user success!</div> -->
+        	
         	<div class="panel-heading" style="background:#337ab7;color:white">Danh sách người dùng</div>
         	<table class="table table-striped">
 
@@ -114,7 +113,6 @@
 											<td><?php echo $user->name ?> </td>
 											<td><?php echo $user->phone ?> </td>
 											<td><?php echo $user->address ?> </td>
-											<td> <?php echo $user->user_level ?>  </td>
                        <td> 
 											<button  class="btn btn-danger" data-id=<?php echo $user->id?> data-name= <?php echo $user->username?> id="btn-del"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</button>
 											</td>
@@ -156,9 +154,9 @@
 					</div>
 				</div>
 			</div>
-		<!-- Button trigger modal -->
 		
-		<!-- Modal -->
+		
+		
 			<div class="modal fade" id="modelSuccess" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 					<div class="modal-dialog" style="top:30%;left:12.5%;text-align:center;" role="document">
 						<div class="modal-content" style="width:50%;padding: 5rem 0;color: red;font-size: 2rem;">
@@ -171,7 +169,7 @@
 			</div>
 
 
-  </div>	<!--/.main-->
+  </div>	
   <script src="js/jquery-1.11.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/chart.min.js"></script>
@@ -183,7 +181,7 @@
     $('#exampleModal').on('show.bs.modal', event => {
     var button = $(event.relatedTarget);
     var modal = $(this);
-    // Use above variables to manipulate the DOM
+    
 
     });
   </script>
@@ -220,7 +218,7 @@
       			}, 1000);
       		}
       	});
-      });//het delete $('button[data-id="' +id +'"]')
+      });
       })
     })
 
