@@ -21,13 +21,13 @@
             return $this->execute(array($name,$brand,$cate,$status,$code,$price,$filename,$imported_price));
         }    
 
-        public function updateProduct($id,$name,$price,$brand,$cate,$filename,$code) {
+        public function updateProduct($id,$name,$price,$brand,$cate,$filename,$code,$status,$imported_price) {
             if(strlen($filename)==0) {
                 
-            $sql="UPDATE  products set name = ?, brand= ?, category =?,code = ?, price =? where id = ?  ";
+            $sql="UPDATE  products set name = ?, brand= ?, category =?,code = ?, price =? ,status=?, imported_price =? where id = ?  ";
             $this->setQuery($sql);
             
-            return $this->execute(array($name,$brand,$cate,$code,$price,$id));
+            return $this->execute(array($name,$brand,$cate,$code,$price,$status,$imported_price,$id));
             }
             else {
             $sql="UPDATE  products set name = ?, brand= ?, category =?,code = ?, price =? ,image=? where id = ?  ";
@@ -59,9 +59,9 @@
             return $this->loadRow();
         }   
         public function getProductByName($name) {
-            $sql="SELECT * from products where name = $name ";
+            $sql="SELECT * from products where name = ? ";
             $this->setQuery($sql);
-            return $this->loadRecord();
+            return $this->loadRecord(array($name));
         }   
     }
 ?>

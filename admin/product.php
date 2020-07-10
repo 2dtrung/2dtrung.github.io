@@ -110,7 +110,7 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-							<a href="/web/admin/addproduct.php" class="btn btn-primary">Thêm sản phẩm</a>
+							<a href="addproduct.php" class="btn btn-primary">Thêm sản phẩm</a>
 								<table class="table table-bordered" style="margin-top:20px;">	
 											
 									<thead>

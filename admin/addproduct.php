@@ -6,6 +6,8 @@
 <?php
 		session_start();
 		unset ( $_SESSION['success']);
+
+		unset ( $_SESSION['error_name']);
     include('controller/c_product.php');
     $c_product=new C_product();
     if(isset($_POST['submit'])) {
@@ -19,8 +21,13 @@
 				$stauts = $_POST['status'];
 				$image = $_FILES['img'];
 				$result= $c_product->addProduct($name,$price,$brand,$category,$code,$image,$imported_price,$stauts);
-				if($result == true) {
+				if($result==1) {
+
+					$_SESSION['error_name'] = "Tên sản phẩm đã tồn tại";
+				}
+				if($result==2) {
 					$_SESSION['success'] = "Bạn đã thêm sản phẩm thành công";
+
 				}
 			}
 ?>
@@ -51,7 +58,7 @@
                 <div class="navbar-header">
                     
                             <!-- guest -->
-                                <a class="navbar-brand" href='#'>TiUh</a>
+                                <a class="navbar-brand" href='dashboard.php'>TiUh</a>
                             <ul class="user-menu">
                                 <li class="dropdown pull-right">
                             
@@ -81,7 +88,7 @@
     <ul class="nav menu">
         <li role="presentation" class="divider"></li>
         <li class=""><a href="dashboard.php"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Trang chủ</a></li>
-        <li class="active" ><a href="product.php"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
+        <li  ><a href="product.php"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
         <li class=""><a href="user.php"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Người dùng  </a></li>
         <li role="presentation" class="divider"></li>
     </ul>
@@ -109,6 +116,11 @@
 							<div class="alert alert-primary"  style="background:#30a5ff;color:white;" role="alert">
 								<strong>Bạn đã thêm sản phẩm thành công</strong>
 							</div>
+					<?php endif?>
+					<?php if (isset($_SESSION['error_name'])):?>
+										 <div class="alert alert-danger style="margin-top:1rem>
+												 <h5 class="color:red">Tên sản phẩm đã tồn tại</h5>
+										 </div>
 					<?php endif?>
 				</div>
 			</div>
@@ -200,7 +212,7 @@
 										Không: <input type="radio" checked name="featured"  value="0">
 									</div> -->
 									<input type="submit" name="submit" value="Thêm" class="btn btn-primary">
-								<a href="{{route('product.index')}}" class="btn btn-danger">Hủy bỏ</a>
+								<a href="addproduct.php" class="btn btn-danger">Hủy bỏ</a>
 								</div>
 							</div>
 						</form>

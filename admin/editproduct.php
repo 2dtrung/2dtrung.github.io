@@ -42,9 +42,11 @@
 				$category = $_POST['category'];
 				$code = $_POST['code'];
 				$image = $_FILES['img'];
-				$result= $c_product->updateProduct($id,$name,$price,$brand,$category,$code,$image);
+				$status = $_POST['status'];
+				$imported_price=$_POST['imported_price'];
+				$result= $c_product->updateProduct($id,$name,$price,$brand,$category,$code,$image,$status,$imported_price);
 				if($result == true) {
-					$_SESSION['success'] = "Bạn đã thêm sản phẩm thành công";
+					$_SESSION['success'] = "Bạn đã thêm sửa phẩm thành công";
 				}
 			}
 ?>
@@ -105,7 +107,7 @@
     <ul class="nav menu">
         <li role="presentation" class="divider"></li>
         <li class=""><a href="dashboard.php"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Trang chủ</a></li>
-        <li class="active" ><a href="product.php"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
+        <li ><a href="product.php"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
         <li class=""><a href="user.php"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Người dùng  </a></li>
         <li role="presentation" class="divider"></li>
     </ul>
@@ -156,67 +158,44 @@
 											</div>
 										@endif -->
 									</div>
+									
 									<div class="form-group" >
 										<label>Giá sản phẩm</label>
-										<input value= <?php echo $product->price ?> type="number" name="price" class="form-control" required>
+										<input value= <?php echo $product->price ?>  type="number" name="price" class="form-control" required>
+									</div>
+									<div class="form-group" >
+										<label>Giá nhâp</label>
+										<input value= <?php echo $product->imported_price ?>  type="number" name="imported_price" class="form-control" required>
 									</div>
 									<div class="form-group" >
 										<label>Ảnh sản phẩm</label>
 										<input  id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
-									<img id="avatar"  class="thumbnail" width="300px" src='../<?php echo $product->image ?>' >
+									<img id="avatar" class="thumbnail" width="300px" src='../<?php echo $product->image ?>'>
 										 <!-- @if($errors->has('img'))
 										 <div class="alert alert-danger style="margin-top:1rem>
-												 <h5 class="color:red">{{ $errors->firsst('img') }}</h5>
+												 <h5 class="color:red">{{ $errors->first('img') }}</h5>
 										 </div>
 									 	@endif -->
 									</div>
 									<div class="form-group" >
 										<label>Thương hiệu</label>
-										<input value= <?php echo $product->brand ?>    type="text" name="brand" class="form-control" required>
+										<input value=<?php echo $product->brand ?>  type="text" name="brand" class="form-control" required>
 									</div>
 									<div class="form-group" >
 										<label>Danh Mục</label>
-										<input value= <?php echo $product->category ?>   type="text" name="category" class="form-control"   required>
+										<input value=<?php echo $product->category ?>  type="text" name="category" class="form-control"   required>
 									</div>
 									<div class="form-group" >
 										<label>Mã code</label>
-										<input  value= <?php echo $product->code ?>   type="text" name="code" class="form-control"  required>
-									</div>
-									<!-- <div class="form-group" >
-										<label>Trạng thái</label>
-										<select  name="status" class="form-control" required>
-											<option   value="1" >Còn hàng</option>
-											<option    value="0">Hết hàng</option>
-					                    </select>
-									</div> -->
-									<!-- <div class="form-group" >
-										<label>Miêu tả</label>
-										<textarea class="ckeditor"  name="description" ></textarea>
-										<script type="text/javascript">
-                    language:'vi',
-											var editor = CKEDITOR.replace('description',{
-												filebrowserImageBrowseUrl: '../../editor/ckfinder/ckfinder.html?Type=Images',
-												filebrowserFlashBrowseUrl: '../../editor/ckfinder/ckfinder.html?Type=Flash',
-												filebrowserImageUploadUrl: '../../editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-												filebrowserFlashUploadUrl: '../../editor/public/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-											});
-										</script>										
-									</div> -->
-									<!-- <div class="form-group" >
-										<label>Danh mục</label>value
-										<select  name="cate" class="form-control">
-											@foreach ($cates as $cate)
-												<option  value="{{ $cate->cate_id}}">{{ $cate->cate_name}}</option>
-											@endforeach
-										</select>
+										<input value=<?php echo $product->code ?> type="text" name="code" class="form-control"  required>
 									</div>
 									<div class="form-group" >
-										<label>Sản phẩm nổi bật</label><br>
-										Có: <input type="radio"  name="featured"  value="1">
-										Không: <input type="radio" checked name="featured"  value="0">
-									</div> -->
-									<input type="submit" name="submit" value="Thêm" class="btn btn-primary">
-								<a href="/edit" class="btn btn-danger">Hủy bỏ</a>
+										<label>Trạng Thái</label>
+										<input value=<?php echo  strlen($product->status)==0 ? 'none' : $product->status  ?>  type="text" name="status" class="form-control"  required>
+									</div>
+									
+									<input type="submit" name="submit" value="Sửa" class="btn btn-primary">
+								<a href="editproduct.php?id=<?php echo $product->id ?>" class="btn btn-danger">Hủy bỏ</a>
 								</div>
 							</div>
 						</form>

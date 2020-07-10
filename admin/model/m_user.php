@@ -15,7 +15,7 @@
             return $this->execute();
         }
         public function getCountUser() {
-            $sql="SELECT Count(*) from users WHERE id != 1";
+            $sql="SELECT Count(*) from users WHERE user_level != 1";
             $this->setQuery($sql);
             
             return $this->loadRecord();

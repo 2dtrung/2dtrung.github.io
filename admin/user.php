@@ -91,7 +91,7 @@
     <div class="row"  style="margin-left:10px" >
     	<div class="col-sm-12" style="margin-top:50px">
         	<!-- <div class="alert alert-success">Added user success!</div> -->
-        	<div class="panel-heading" style="background:#337ab7;color:white">Danh sách sản phẩm</div>
+        	<div class="panel-heading" style="background:#337ab7;color:white">Danh sách người dùng</div>
         	<table class="table table-striped">
 
             	<tr id="tbl-first-row">
