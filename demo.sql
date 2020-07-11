@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2020 at 08:54 AM
+-- Generation Time: Jul 11, 2020 at 04:56 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -81,7 +81,8 @@ INSERT INTO `products` (`id`, `name`, `brand`, `category`, `status`, `code`, `pr
 (33, 'Korea Shirt', 'Nike', 'shirt', '', 'KS', 22.87, './img/img-21.jpg', 12.87, 0.00, 0.00),
 (34, 'Nigeria Shirt', 'Nike', 'shirt', '', 'NS', 22.87, './img/img-22.jpg', 12.87, 0.00, 0.00),
 (35, 'USA Shirt', 'Nike', 'shirt', '', 'US', 22.87, './img/img-23.jpg', 12.87, 0.00, 0.00),
-(36, 'Norway Shirt', 'Nike', 'shirt', '', 'NSS', 22.87, './img/img-24.jpg', 12.87, 0.00, 0.00);
+(36, 'Norway', 'Nike', 'shirt', 'none', 'NSS', 27.87, './img/img-24.jpg', 12.87, 0.00, 0.00),
+(39, 'hhh', 'nike', 'outdoor', 'sale', 'FFFFFF', 35.00, 'img/img-3.jpg', 34.00, 0.00, 0.00);
 
 -- --------------------------------------------------------
 
@@ -106,8 +107,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `name`, `phone`, `address`, `user_level`) VALUES
 (1, 'admin', '$2y$10$ktGQBSPnifaCAM1uiimxkOoYOXhCBqmPv1.Mm2rHGTtxwKyYps17y', '2020-06-27 15:06:47', 'Quản trị viên', '0346416702', 'AH2', 1),
-(2, 'tuhuynh', '$2y$10$v0cNajTLVfkemo1TdMIBu.iiXl0uBysfD8NlCzf22W2Wvm374wE.6', '2020-06-27 09:37:56', 'Huỳnh Ngọc Tú', '0346416702', 'AH2', 0),
-(5, 'tuhuynh23', '$2y$10$7jh.nDVUOwLCbqKTOcSgPeHDl5btgtbyUs3BtfbIqZgbJYG7/wXZC', '2020-07-10 10:01:47', 'H N Tú', '0346416702', 'KTX A', 0);
+(2, 'tuhuynh', '$2y$10$v0cNajTLVfkemo1TdMIBu.iiXl0uBysfD8NlCzf22W2Wvm374wE.6', '2020-06-27 09:37:56', 'Huỳnh Ngọc Tú', '0346416702', 'AH2', 0);
 
 --
 -- Indexes for dumped tables
@@ -135,13 +135,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

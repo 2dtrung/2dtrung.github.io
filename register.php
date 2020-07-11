@@ -124,7 +124,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 
                 header("location: login.php");
             } else{
-                echo "Something went wrong. Please try again later.";
+                echo "Đã có lỗi xảy ra, vui lòng thử lại sau.";
             }
 
             
