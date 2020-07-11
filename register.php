@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
+        $username_err = "Bạn chưa nhập tài khoản";
     } else{
         
         $sql = "SELECT id FROM users WHERE username = ?";
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $username = trim($_POST["username"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "Đã có lỗi xảy ra, vui lòng thử lại sau.";
             }
 
             
@@ -59,29 +59,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter a password.";
-    } elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+        $password_err = "Bạn chưa nhập mật khẩu!";
+    } elseif(strlen(trim($_POST["password"])) < 5){
+        $password_err = "Mật khẩu bạn nhập quá ngắn!";
     } else{
         $password = trim($_POST["password"]);
     }
 
     
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm password.";
+        $confirm_password_err = "Bạn chưa xác nhận mật khẩu!";
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "Mật khẩu xác nhận không khớp!";
         }
     }
     
-    $name = trim($_POST["name"]);
-    $phone = trim($_POST["phone"]);
-    $address = trim($_POST["address"]);
+    if(empty(trim($_POST["name"]))){
+      $name_err = "Bạn chưa nhập họ và tên!";
+    } elseif(strlen(trim($_POST["name"])) > 25){
+      $name_err = "Tên bạn vừa nhập quá dài!";
+    } else{
+      $name = trim($_POST["name"]);
+    }
+
+    if(empty(trim($_POST["phone"]))){
+      $phone_err = "Bạn chưa nhập số điện thoại!";
+    } elseif(strlen(trim($_POST["phone"])) > 11){
+      $phone_err = "Số điện thoại không đúng!";
+    } elseif(strlen(trim($_POST["phone"])) < 10){
+      $phone_err = "Số điện thoại không đúng!";
+    } else{
+      $phone = trim($_POST["phone"]);
+    }
+    
+    if(empty(trim($_POST["address"]))){
+      $address_err = "Bạn chưa nhập địa chỉ!";
+    } elseif(strlen(trim($_POST["address"])) > 1000){
+      $address_err = "Địa chỉ bạn nhập quá dài!";
+    } else{
+      $address = trim($_POST["address"]);
+    }
 
     
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($name_err) && empty($phone_err) && empty($address_err)){
 
         
         $sql = "INSERT INTO users (username, password, name, phone, address) VALUES (?, ?, ?, ?, ?)";
@@ -90,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             $stmt->bind_param("sssss", $param_username, $param_password, $param_name, $param_phone, $param_address);
 
-            // Set parameters
+            
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); 
             $param_name = $name;
@@ -143,54 +165,67 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       var inAddress = document.getElementById("address").value;
       if(inVar == "" && inPass == ""){
         window.alert("Bạn chưa nhập tài khoản và mật khẩu!");
+         
         return false;
       }
       if(inVar == ""){
         window.alert("Bạn chưa nhập tài khoản!");
+         
         return false;
       }
       if(inPass == ""){
         window.alert("Bạn chưa nhập mật khẩu!");
+         
         return false;
       }
       if(inRepass == ""){
         window.alert("Bạn chưa xác nhận mật khẩu!");
+         
         return false;
       }
       if(inName == ""){
         window.alert("Bạn chưa nhập họ và tên!");
+         
         return false;
       }
       if(inPhone == ""){
         window.alert("Bạn chưa nhập số điện thoại!");
+         
         return false;
       }
       if(inAddress == ""){
         window.alert("Bạn chưa nhập địa chỉ!");
+         
         return false;
       }
       if(inRepass != inPass){
         window.alert("Mật khẩu xác nhận không khớp!");
+         
         return false;
       }
       if(inPass.length < 5){
         window.alert("Mật khẩu của bạn quá ngắn!");
+         
         return false;
       }
       if(inName.length > 25){
         window.alert("Tên bạn vừa nhập quá dài!");
+         
         return false;
       }
       if(inPhone.length > 11){
         window.alert("Số điện thoại không đúng!");
+         
         return false;
       }
       if(inPhone.length < 10){
         window.alert("Số điện thoại không đúng!");
+         
         return false;
       }
       if(inAddress.length > 1000){
         window.alert("Địa chỉ bạn nhập quá dài!");
+         
         return false;
       }
       return true;
@@ -287,27 +322,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label>Mật khẩu</label>
             <input type="password" id="password" name="password" class="form-control" value="<?php echo $password; ?>">
-           
+            <span class="help-block"><?php echo $password_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
             <label>Xác nhận Mật khẩu</label>
             <input type="password" id="repassword" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-            
+            <span class="help-block"><?php echo $confirm_password_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
             <label>Họ và Tên</label>
             <input type="text" id="name" name="name" class="form-control" value="<?php echo $name; ?>">
-            
+            <span class="help-block"><?php echo $name_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
             <label>Số điện thoại</label>
             <input type="number" id="phone" name="phone" class="form-control" value="<?php echo $phone; ?>">
-            
+            <span class="help-block"><?php echo $phone_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($address_err)) ? 'has-error' : ''; ?>">
             <label>Địa chỉ</label>
             <input type="text" id="address" name="address" class="form-control" value="<?php echo $address; ?>">
-            
+            <span class="help-block"><?php echo $address_err; ?></span>
         </div>
         <div class="form-group">
             <input type="submit" class="btn btn-primary" value="Đăng ký" onclick="javascript:check()">
